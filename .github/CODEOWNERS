@@ -1,0 +1,16 @@
+# Code owners are requested for review on every pull request touching their paths.
+#
+# Uncomment and set a real GitHub team (or users) to enable. GitHub reports an
+# error for teams that do not exist, so the rules ship commented out.
+#
+# *                                                              @<org>/<maintainers-team>
+# /infra/                                                        @<org>/<maintainers-team>
+# /apps/api/src/mcphub/core/security.py                          @<org>/<security-team>
+# /apps/api/src/mcphub/api/deps.py                               @<org>/<security-team>
+# /apps/api/src/mcphub/policy/                                   @<org>/<security-team>
+# /apps/api/src/mcphub/upstream/guard.py                         @<org>/<security-team>
+# /apps/api/src/mcphub/integrations/vault.py                     @<org>/<security-team>
+# /apps/api/src/mcphub/services/gateway.py                       @<org>/<security-team>
+# /apps/api/src/mcphub/services/secrets.py                       @<org>/<security-team>
+# /apps/api/src/mcphub/services/users.py                         @<org>/<security-team>
+# /infra/terraform/modules/deployment/                           @<org>/<security-team>

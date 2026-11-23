@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars and fill in. Never commit terraform.tfvars.
+name_prefix     = "mcphub-prod"
+hostname        = "mcphub.example.com"
+route53_zone_id = "Z0000000000000000000"
+alarm_email     = "oncall@example.com"
+
+# Optional: MCP servers inside the VPC that the gateway may reach.
+# upstream_allowed_hosts = ["*.internal.example.com"]

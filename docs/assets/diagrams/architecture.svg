@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">MCPHub architecture</title>
+  <desc id="d">MCP clients and the dashboard reach the API and gateway; the gateway applies policy and calls upstream MCP servers; Postgres, Valkey and KMS hold the data; the worker checks health and discovers tools.</desc>
+  <style>
+    .box { fill: #ffffff; stroke: #c7cbe0; stroke-width: 1.5; }
+    .app { fill: #eef0ff; stroke: #6366f1; stroke-width: 1.5; }
+    .data { fill: #f3f6f4; stroke: #86a89a; stroke-width: 1.5; }
+    .up { fill: #fdf6ea; stroke: #d6a45b; stroke-width: 1.5; }
+    .t { font: 600 15px Inter, 'Segoe UI', Helvetica, Arial, sans-serif; fill: #12141f; }
+    .s { font: 12.5px Inter, 'Segoe UI', Helvetica, Arial, sans-serif; fill: #4b5163; }
+    .l { font: 12px 'JetBrains Mono', Menlo, Consolas, monospace; fill: #3730a3; }
+    .a { stroke: #6b7280; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+    .g { font: 700 12px Inter, 'Segoe UI', Helvetica, Arial, sans-serif; fill: #6b7280; letter-spacing: 0.08em; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+
+  <text x="40" y="38" class="g">CALLERS</text>
+  <rect x="40" y="52" width="250" height="84" rx="12" class="box"/>
+  <text x="60" y="84" class="t">Dashboard (browser)</text>
+  <text x="60" y="106" class="s">Operators and viewers, session cookie</text>
+  <rect x="40" y="156" width="250" height="84" rx="12" class="box"/>
+  <text x="60" y="188" class="t">MCP clients</text>
+  <text x="60" y="210" class="s">Agents, IDEs, apps. One URL, one key</text>
+
+  <text x="360" y="38" class="g">MCPHUB</text>
+  <rect x="360" y="52" width="250" height="84" rx="12" class="app"/>
+  <text x="380" y="84" class="t">web (Next.js)</text>
+  <text x="380" y="106" class="s">Runtime config from /env.js</text>
+  <rect x="360" y="156" width="250" height="228" rx="12" class="app"/>
+  <text x="380" y="188" class="t">api (FastAPI)</text>
+  <text x="380" y="214" class="l">/api/v1</text><text x="450" y="214" class="s">management API</text>
+  <text x="380" y="238" class="l">/mcp</text><text x="450" y="238" class="s">the gateway</text>
+  <text x="380" y="270" class="s">1 authenticate the key</text>
+  <text x="380" y="290" class="s">2 compile the client view</text>
+  <text x="380" y="310" class="s">3 policy, schema, constraints</text>
+  <text x="380" y="330" class="s">4 rate limits</text>
+  <text x="380" y="350" class="s">5 forward, 6 record the call</text>
+  <rect x="360" y="410" width="250" height="84" rx="12" class="app"/>
+  <text x="380" y="442" class="t">worker</text>
+  <text x="380" y="464" class="s">Health, discovery, retention</text>
+
+  <text x="690" y="38" class="g">DATA</text>
+  <rect x="690" y="52" width="230" height="96" rx="12" class="data"/>
+  <text x="710" y="84" class="t">PostgreSQL 16</text>
+  <text x="710" y="106" class="s">Catalog, policy, audit log,</text>
+  <text x="710" y="124" class="s">secret ciphertext</text>
+  <rect x="690" y="168" width="230" height="84" rx="12" class="data"/>
+  <text x="710" y="200" class="t">Valkey</text>
+  <text x="710" y="222" class="s">Key and view caches, limits</text>
+  <rect x="690" y="272" width="230" height="96" rx="12" class="data"/>
+  <text x="710" y="304" class="t">KMS / Secrets Manager</text>
+  <text x="710" y="326" class="s">Floci locally, AWS in production</text>
+
+  <text x="960" y="38" class="g">UPSTREAM</text>
+  <rect x="960" y="52" width="200" height="96" rx="12" class="up"/>
+  <text x="980" y="84" class="t">MCP server</text>
+  <text x="980" y="106" class="s">Streamable HTTP, token</text>
+  <text x="980" y="124" class="s">injected at connect</text>
+  <rect x="960" y="168" width="200" height="96" rx="12" class="up"/>
+  <text x="980" y="200" class="t">MCP server</text>
+  <text x="980" y="222" class="s">stdio subprocess</text>
+  <text x="980" y="240" class="s">(local stacks)</text>
+  <rect x="960" y="284" width="200" height="84" rx="12" class="up"/>
+  <text x="980" y="316" class="t">Egress policy</text>
+  <text x="980" y="338" class="s">No metadata, no private</text>
+  <text x="980" y="354" class="s">ranges unless allowed</text>
+
+  <path d="M290 94 L360 94" class="a"/>
+  <path d="M290 198 L360 198" class="a"/>
+  <path d="M485 136 L485 156" class="a"/>
+  <path d="M610 190 L690 100" class="a"/>
+  <path d="M610 230 L690 210" class="a"/>
+  <path d="M610 270 L690 318" class="a"/>
+  <path d="M610 330 C 800 400, 900 150, 960 100" class="a"/>
+  <path d="M610 350 C 760 420, 900 240, 960 216" class="a"/>
+  <path d="M610 452 L690 140" class="a"/>
+  <path d="M610 470 C 800 520, 950 300, 960 130" class="a"/>
+
+  <rect x="40" y="540" width="1120" height="52" rx="12" fill="#eef0ff" stroke="#c7cbe0"/>
+  <text x="60" y="571" class="s">Every call, allowed or refused, becomes one audit row, written in batches off the request path.</text>
+</svg>
